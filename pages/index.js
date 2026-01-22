@@ -26,19 +26,7 @@ export default function Home() {
 
   return (
     <div className={styles.landingPage}>
-      {/* Scrolling Banner */}
-      <div className={styles.scrollingBanner}>
-        <div className={styles.bannerContent}>
-          {[...Array(10)].map((_, i) => (
-            <span key={i} className={styles.bannerText}>
-              <span>Safe Haven for NRI Homes</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M7 17L17 7M17 7H7M17 7V17" />
-              </svg>
-            </span>
-          ))}
-        </div>
-      </div>
+
 
       {/* Navbar */}
       <nav className={`${styles.navbar} ${scrolled ? styles.navbarScrolled : ''}`}>
