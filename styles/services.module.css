@@ -1,0 +1,371 @@
+/* Services Page Styles */
+
+.servicesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.serviceCard {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-gray);
+    overflow: hidden;
+    transition: box-shadow var(--transition-fast);
+}
+
+.serviceCard:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.serviceImage {
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+    background: var(--color-light-gray);
+}
+
+.serviceImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.serviceContent {
+    padding: 1.25rem;
+}
+
+.serviceHeader {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.serviceName {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    color: var(--color-text);
+    margin: 0;
+}
+
+.statusBadge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+}
+
+.statusBadge.active {
+    background: var(--color-success-bg);
+    color: var(--color-success);
+}
+
+.statusBadge.inactive {
+    background: var(--color-light-gray);
+    color: var(--color-medium-gray);
+}
+
+.serviceDescription {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.servicePrice {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+.serviceActions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.editBtn,
+.toggleBtn,
+.deleteBtn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    transition: all var(--transition-fast);
+}
+
+.editBtn {
+    background: var(--color-accent-light);
+    color: var(--color-primary);
+}
+
+.editBtn:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+.toggleBtn {
+    background: var(--color-light-gray);
+    color: var(--color-text-secondary);
+}
+
+.toggleBtn:hover {
+    background: var(--color-gray);
+    color: var(--color-text);
+}
+
+.deleteBtn {
+    background: var(--color-error-bg);
+    color: var(--color-error);
+}
+
+.deleteBtn:hover {
+    background: var(--color-error);
+    color: var(--color-white);
+}
+
+/* Modal */
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 1rem;
+}
+
+.modal {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modalHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--color-gray);
+}
+
+.modalHeader h2 {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    color: var(--color-text);
+    margin: 0;
+}
+
+.closeBtn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-secondary);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+}
+
+.closeBtn:hover {
+    background: var(--color-light-gray);
+    color: var(--color-text);
+}
+
+.closeBtn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.form {
+    padding: 1.5rem;
+}
+
+.form .formGroup {
+    margin-bottom: 1rem;
+}
+
+.textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-gray);
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    font-family: var(--font-sans);
+    resize: vertical;
+    transition: border-color var(--transition-fast);
+}
+
+.textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.fileInput {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px dashed var(--color-gray);
+    border-radius: var(--radius-md);
+    background: var(--color-light-gray);
+    cursor: pointer;
+}
+
+.imagePreview {
+    margin-top: 0.75rem;
+    position: relative;
+    display: inline-block;
+}
+
+.imagePreview img {
+    max-width: 200px;
+    max-height: 150px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-gray);
+}
+
+.removeImage {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 24px;
+    height: 24px;
+    background: var(--color-error);
+    color: var(--color-white);
+    border-radius: 50%;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkboxGroup {
+    margin: 1.25rem 0;
+}
+
+.checkboxGroup label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.checkboxGroup input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-primary);
+}
+
+.checkboxGroup span {
+    font-size: 0.95rem;
+    color: var(--color-text);
+}
+
+.modalActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-gray);
+    margin-top: 1rem;
+}
+
+/* Request Card Styles */
+.requestCard {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-gray);
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.requestHeader {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.requestService {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: var(--color-text);
+}
+
+.requestStatus {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.requestStatus.pending {
+    background: #FFF3E0;
+    color: #E65100;
+}
+
+.requestStatus.inProgress {
+    background: #E3F2FD;
+    color: #1565C0;
+}
+
+.requestStatus.completed {
+    background: var(--color-success-bg);
+    color: var(--color-success);
+}
+
+.requestInfo {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.requestActions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.statusBtn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    background: var(--color-primary);
+    color: var(--color-white);
+    transition: background var(--transition-fast);
+}
+
+.statusBtn:hover {
+    background: var(--color-primary-dark);
+}
+
+.proofImage {
+    margin-top: 1rem;
+    max-width: 300px;
+    border-radius: var(--radius-md);
+}
+
+.remarkText {
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    background: var(--color-light-gray);
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}

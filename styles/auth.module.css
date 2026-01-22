@@ -1,0 +1,200 @@
+.authContainer {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-off-white) 0%, var(--color-accent-light) 100%);
+    padding: var(--spacing-lg);
+}
+
+.authCard {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: var(--spacing-2xl);
+    width: 100%;
+    max-width: 420px;
+}
+
+.authHeader {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.logoLink {
+    text-decoration: none;
+    display: inline-block;
+}
+
+.logo {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.subtitle {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+}
+
+.error {
+    background: var(--color-error-bg);
+    color: var(--color-error);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-lg);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.inputGroup label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+.inputGroup input {
+    padding: var(--spacing-md);
+    border: 1px solid var(--color-gray);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.inputGroup input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(139, 90, 43, 0.1);
+}
+
+.inputGroup input::placeholder {
+    color: var(--color-medium-gray);
+}
+
+/* Role Selection */
+.roleSelection {
+    margin-top: var(--spacing-sm);
+}
+
+.roleLabel {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text);
+    display: block;
+    margin-bottom: var(--spacing-xs);
+}
+
+.roleNote {
+    font-size: 0.75rem;
+    color: var(--color-medium-gray);
+    margin-bottom: var(--spacing-md);
+}
+
+.roleOptions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.roleOption {
+    display: flex;
+    align-items: flex-start;
+    padding: var(--spacing-md);
+    border: 2px solid var(--color-gray);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.roleOption:hover {
+    border-color: var(--color-primary-light);
+    background: var(--color-off-white);
+}
+
+.roleOption.selected {
+    border-color: var(--color-primary);
+    background: rgba(139, 90, 43, 0.05);
+}
+
+.roleOption input {
+    margin-right: var(--spacing-md);
+    margin-top: 3px;
+    accent-color: var(--color-primary);
+}
+
+.roleContent {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.roleTitle {
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.roleDescription {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+}
+
+/* Submit Button */
+.submitBtn {
+    background: var(--color-primary);
+    color: var(--color-white);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+    margin-top: var(--spacing-sm);
+}
+
+.submitBtn:hover:not(:disabled) {
+    background: var(--color-primary-dark);
+}
+
+.submitBtn:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.submitBtn:disabled {
+    background: var(--color-medium-gray);
+    cursor: not-allowed;
+}
+
+/* Auth Footer */
+.authFooter {
+    text-align: center;
+    margin-top: var(--spacing-xl);
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+}
+
+.authFooter a {
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .authCard {
+        padding: var(--spacing-xl);
+    }
+
+    .logo {
+        font-size: 1.75rem;
+    }
+}

@@ -1,0 +1,259 @@
+/* Dashboard Layout Styles */
+
+.layout {
+    display: flex;
+    min-height: 100vh;
+    background: var(--color-off-white);
+}
+
+/* Overlay for mobile */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 40;
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .overlay {
+        display: block;
+    }
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background: var(--color-white);
+    border-right: 1px solid var(--color-gray);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 50;
+    transition: transform 0.3s ease;
+}
+
+@media (max-width: 900px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+}
+
+.sidebarHeader {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--color-gray);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.closeSidebar {
+    display: none;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    color: var(--color-text-secondary);
+}
+
+.closeSidebar svg {
+    width: 20px;
+    height: 20px;
+}
+
+@media (max-width: 900px) {
+    .closeSidebar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/* Navigation */
+.sidebarNav {
+    flex: 1;
+    padding: 1rem 0;
+    overflow-y: auto;
+}
+
+.navLink {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1.5rem;
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+    border-left: 3px solid transparent;
+}
+
+.navLink:hover {
+    background: var(--color-light-gray);
+    color: var(--color-text);
+}
+
+.navLink.active {
+    background: var(--color-accent-light);
+    color: var(--color-primary);
+    border-left-color: var(--color-primary);
+}
+
+.navIcon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navIcon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.navLabel {
+    flex: 1;
+}
+
+/* Sidebar Footer */
+.sidebarFooter {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--color-gray);
+}
+
+.logoutBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.75rem 0;
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color var(--transition-fast);
+}
+
+.logoutBtn:hover {
+    color: var(--color-error);
+}
+
+.logoutBtn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Main Content Area */
+.mainContent {
+    flex: 1;
+    margin-left: 260px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+@media (max-width: 900px) {
+    .mainContent {
+        margin-left: 0;
+    }
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-gray);
+    position: sticky;
+    top: 0;
+    z-index: 30;
+}
+
+.menuToggle {
+    display: none;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    color: var(--color-text);
+}
+
+.menuToggle svg {
+    width: 24px;
+    height: 24px;
+}
+
+@media (max-width: 900px) {
+    .menuToggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.headerTitle {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    color: var(--color-text);
+    font-weight: 500;
+}
+
+.headerRight {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.15rem;
+}
+
+.userEmail {
+    font-size: 0.875rem;
+    color: var(--color-text);
+    font-weight: 500;
+}
+
+.userRole {
+    font-size: 0.7rem;
+    color: var(--color-white);
+    background: var(--color-primary);
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-full);
+    letter-spacing: 0.5px;
+}
+
+/* Page Content */
+.pageContent {
+    flex: 1;
+    padding: 2rem;
+}
+
+@media (max-width: 768px) {
+    .pageContent {
+        padding: 1.25rem;
+    }
+
+    .userEmail {
+        display: none;
+    }
+}
