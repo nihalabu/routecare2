@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
@@ -12,6 +12,13 @@ export default function Login() {
 
     const { login, userRole } = useAuth();
     const router = useRouter();
+
+    // Show blocked message if redirected from ProtectedRoute
+    useEffect(() => {
+        if (router.query.blocked === 'true') {
+            setError('Your account has been blocked. Please contact the administrator.');
+        }
+    }, [router.query]);
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -42,6 +49,8 @@ export default function Login() {
                 return 'Incorrect password.';
             case 'auth/invalid-credential':
                 return 'Invalid email or password.';
+            case 'auth/user-blocked':
+                return 'Your account has been blocked. Please contact the administrator.';
             default:
                 return 'Failed to login. Please try again.';
         }

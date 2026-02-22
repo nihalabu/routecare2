@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useAuth } from '@/contexts/AuthContext';
 
 export default function ProtectedRoute({ children, allowedRole }) {
-    const { user, userRole, loading } = useAuth();
+    const { user, userRole, userStatus, loading, logout } = useAuth();
     const router = useRouter();
 
     useEffect(() => {
@@ -11,6 +11,14 @@ export default function ProtectedRoute({ children, allowedRole }) {
             // If not logged in, redirect to login
             if (!user) {
                 router.push('/login');
+                return;
+            }
+
+            // If user is blocked, sign them out and redirect
+            if (userStatus === 'blocked') {
+                logout().then(() => {
+                    router.push('/login?blocked=true');
+                });
                 return;
             }
 
@@ -23,7 +31,7 @@ export default function ProtectedRoute({ children, allowedRole }) {
                 }
             }
         }
-    }, [user, userRole, loading, router, allowedRole]);
+    }, [user, userRole, userStatus, loading, router, allowedRole]);
 
     // Show loading state
     if (loading) {
@@ -37,6 +45,11 @@ export default function ProtectedRoute({ children, allowedRole }) {
 
     // If not authenticated, don't render children
     if (!user) {
+        return null;
+    }
+
+    // If blocked, don't render children
+    if (userStatus === 'blocked') {
         return null;
     }
 

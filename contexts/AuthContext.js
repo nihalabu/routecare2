@@ -17,6 +17,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const [userRole, setUserRole] = useState(null);
+    const [userStatus, setUserStatus] = useState(null);
     const [loading, setLoading] = useState(true);
 
     // Sign up with email, password, and role
@@ -29,35 +30,49 @@ export function AuthProvider({ children }) {
             uid: newUser.uid,
             email: newUser.email,
             role: role,
+            status: 'active',
             createdAt: serverTimestamp()
         });
 
         setUserRole(role);
+        setUserStatus('active');
         return userCredential;
     }
 
     // Login with email and password
     async function login(email, password) {
-        return signInWithEmailAndPassword(auth, email, password);
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+        // Check if user is blocked before allowing login
+        const userDoc = await getDoc(doc(db, 'users', userCredential.user.uid));
+        if (userDoc.exists() && userDoc.data().status === 'blocked') {
+            // Sign them out immediately and throw an error
+            await signOut(auth);
+            throw { code: 'auth/user-blocked' };
+        }
+
+        return userCredential;
     }
 
     // Logout
     async function logout() {
         setUserRole(null);
+        setUserStatus(null);
         return signOut(auth);
     }
 
-    // Fetch user role from Firestore
-    async function fetchUserRole(uid) {
+    // Fetch user role and status from Firestore
+    async function fetchUserData(uid) {
         try {
             const userDoc = await getDoc(doc(db, 'users', uid));
             if (userDoc.exists()) {
-                return userDoc.data().role;
+                const data = userDoc.data();
+                return { role: data.role, status: data.status || 'active' };
             }
-            return null;
+            return { role: null, status: null };
         } catch (error) {
-            console.error('Error fetching user role:', error);
-            return null;
+            console.error('Error fetching user data:', error);
+            return { role: null, status: null };
         }
     }
 
@@ -66,10 +81,20 @@ export function AuthProvider({ children }) {
             setUser(currentUser);
 
             if (currentUser) {
-                const role = await fetchUserRole(currentUser.uid);
+                const { role, status } = await fetchUserData(currentUser.uid);
                 setUserRole(role);
+                setUserStatus(status);
+
+                // If user is blocked, sign them out
+                if (status === 'blocked') {
+                    await signOut(auth);
+                    setUser(null);
+                    setUserRole(null);
+                    setUserStatus(null);
+                }
             } else {
                 setUserRole(null);
+                setUserStatus(null);
             }
 
             setLoading(false);
@@ -81,6 +106,7 @@ export function AuthProvider({ children }) {
     const value = {
         user,
         userRole,
+        userStatus,
         loading,
         signup,
         login,
