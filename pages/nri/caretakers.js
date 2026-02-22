@@ -6,6 +6,7 @@ import ProtectedRoute from '@/components/ProtectedRoute';
 import DashboardLayout from '@/components/DashboardLayout';
 import styles from '@/styles/dashboard.module.css';
 import serviceStyles from '@/styles/services.module.css';
+import reviewStyles from '@/styles/reviews.module.css';
 
 export default function NRICaretakers() {
     const { user } = useAuth();
@@ -41,9 +42,26 @@ export default function NRICaretakers() {
                     );
                     const querySnap = await getDocs(caretakersQuery);
 
-                    querySnap.forEach((doc) => {
-                        caretakersList.push({ id: doc.id, ...doc.data() });
-                    });
+                    for (const docSnap of querySnap.docs) {
+                        const ctData = { id: docSnap.id, ...docSnap.data() };
+
+                        // Fetch average rating for this caretaker
+                        const reviewsQuery = query(
+                            collection(db, 'reviews'),
+                            where('caretakerId', '==', docSnap.id)
+                        );
+                        const reviewsSnap = await getDocs(reviewsQuery);
+                        let totalRating = 0;
+                        let reviewCount = 0;
+                        reviewsSnap.forEach((r) => {
+                            totalRating += r.data().rating || 0;
+                            reviewCount++;
+                        });
+                        ctData.avgRating = reviewCount > 0 ? totalRating / reviewCount : 0;
+                        ctData.reviewCount = reviewCount;
+
+                        caretakersList.push(ctData);
+                    }
                 }
 
                 setCaretakers(caretakersList);
@@ -186,6 +204,28 @@ export default function NRICaretakers() {
                                                     {caretaker.displayName || caretaker.email}
                                                 </div>
                                                 <div className={styles.caretakerId}>{caretaker.caretakerId}</div>
+                                                {caretaker.reviewCount > 0 && (
+                                                    <div className={reviewStyles.starsDisplay} style={{ marginTop: '0.25rem' }}>
+                                                        {[...Array(5)].map((_, i) => (
+                                                            <svg
+                                                                key={i}
+                                                                viewBox="0 0 24 24"
+                                                                className={`${reviewStyles.starSmall} ${i < Math.round(caretaker.avgRating) ? reviewStyles.filled : ''}`}
+                                                                stroke="currentColor"
+                                                                strokeWidth="2"
+                                                                fill={i < Math.round(caretaker.avgRating) ? 'currentColor' : 'none'}
+                                                            >
+                                                                <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
+                                                            </svg>
+                                                        ))}
+                                                        <span className={reviewStyles.ratingValue} style={{ fontSize: '0.8rem' }}>
+                                                            {caretaker.avgRating.toFixed(1)}
+                                                        </span>
+                                                        <span className={reviewStyles.ratingCount}>
+                                                            ({caretaker.reviewCount})
+                                                        </span>
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                     ))}

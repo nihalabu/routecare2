@@ -16,7 +16,7 @@ export default function ProtectedRoute({ children, allowedRole }) {
 
             // If role doesn't match, redirect to appropriate dashboard
             if (allowedRole && userRole && userRole !== allowedRole) {
-                if (userRole === 'caretaker' || userRole === 'nri') {
+                if (userRole === 'caretaker' || userRole === 'nri' || userRole === 'admin') {
                     router.push(`/${userRole}/dashboard`);
                 } else {
                     router.push('/login');

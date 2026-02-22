@@ -215,11 +215,13 @@ export default function CaretakerRequests() {
                                     {request.proof && (
                                         <img src={request.proof} alt="Proof" className={serviceStyles.proofImage} />
                                     )}
-                                    <div className={serviceStyles.requestActions}>
-                                        <button onClick={() => openUpdateModal(request)} className={serviceStyles.statusBtn}>
-                                            Update Status
-                                        </button>
-                                    </div>
+                                    {request.status !== 'completed' && (
+                                        <div className={serviceStyles.requestActions}>
+                                            <button onClick={() => openUpdateModal(request)} className={serviceStyles.statusBtn}>
+                                                Update Status
+                                            </button>
+                                        </div>
+                                    )}
                                 </div>
                             ))}
                         </div>

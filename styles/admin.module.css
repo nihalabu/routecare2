@@ -1,0 +1,296 @@
+/* Admin Module Styles */
+
+/* Search & Filter Bar */
+.toolbar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.searchInput {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-gray);
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    transition: border-color var(--transition-fast);
+}
+
+.searchInput:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+/* Filter Tabs */
+.filterTabs {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.filterTab {
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-full);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    background: var(--color-light-gray);
+    transition: all var(--transition-fast);
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.filterTab:hover {
+    color: var(--color-text);
+    background: var(--color-gray);
+}
+
+.filterTab.active {
+    color: var(--color-white);
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+/* Data Table */
+.dataTable {
+    width: 100%;
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-gray);
+    overflow: hidden;
+}
+
+.tableHeader {
+    display: grid;
+    padding: 0.875rem 1.25rem;
+    background: var(--color-light-gray);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--color-gray);
+}
+
+.tableRow {
+    display: grid;
+    padding: 1rem 1.25rem;
+    align-items: center;
+    border-bottom: 1px solid var(--color-light-gray);
+    font-size: 0.9rem;
+    transition: background var(--transition-fast);
+}
+
+.tableRow:last-child {
+    border-bottom: none;
+}
+
+.tableRow:hover {
+    background: var(--color-off-white);
+}
+
+/* Grid columns for Users/Workers table */
+.usersGrid {
+    grid-template-columns: 2fr 1.5fr 1fr 120px;
+}
+
+/* Grid columns for Requests table */
+.requestsGrid {
+    grid-template-columns: 1.5fr 1.5fr 1fr 1fr 120px;
+}
+
+@media (max-width: 768px) {
+    .usersGrid {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+    }
+
+    .requestsGrid {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+    }
+
+    .tableHeader {
+        display: none;
+    }
+
+    .tableRow {
+        padding: 1rem;
+        border-bottom: 1px solid var(--color-gray);
+    }
+
+    .mobileLabel {
+        font-size: 0.75rem;
+        color: var(--color-text-secondary);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        margin-bottom: 0.15rem;
+    }
+}
+
+/* Status Badge */
+.statusBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: var(--radius-full);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.statusActive {
+    background: var(--color-success-bg);
+    color: var(--color-success);
+}
+
+.statusBlocked {
+    background: var(--color-error-bg);
+    color: var(--color-error);
+}
+
+.statusPending {
+    background: #FFF8E1;
+    color: #F57F17;
+}
+
+.statusInProgress {
+    background: #E3F2FD;
+    color: #1565C0;
+}
+
+.statusCompleted {
+    background: var(--color-success-bg);
+    color: var(--color-success);
+}
+
+/* Action Buttons */
+.blockBtn {
+    padding: 0.4rem 0.85rem;
+    border-radius: var(--radius-md);
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+    cursor: pointer;
+}
+
+.blockBtn.block {
+    color: var(--color-error);
+    background: var(--color-error-bg);
+    border: 1px solid transparent;
+}
+
+.blockBtn.block:hover {
+    background: var(--color-error);
+    color: var(--color-white);
+}
+
+.blockBtn.unblock {
+    color: var(--color-success);
+    background: var(--color-success-bg);
+    border: 1px solid transparent;
+}
+
+.blockBtn.unblock:hover {
+    background: var(--color-success);
+    color: var(--color-white);
+}
+
+/* Cell text */
+.cellEmail {
+    font-weight: 500;
+    color: var(--color-text);
+    word-break: break-all;
+}
+
+.cellSecondary {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+}
+
+.cellDate {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+}
+
+/* Stats grid with 5 columns for admin */
+.adminStatsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Activity List */
+.activityList {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-gray);
+    overflow: hidden;
+}
+
+.activityItem {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--color-light-gray);
+}
+
+.activityItem:last-child {
+    border-bottom: none;
+}
+
+.activityDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.activityDot.pending {
+    background: #F57F17;
+}
+
+.activityDot.inProgress {
+    background: #1565C0;
+}
+
+.activityDot.completed {
+    background: var(--color-success);
+}
+
+.activityContent {
+    flex: 1;
+    min-width: 0;
+}
+
+.activityTitle {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--color-text);
+}
+
+.activityMeta {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    margin-top: 0.15rem;
+}
+
+.activityDate {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    flex-shrink: 0;
+}
+
+/* No results */
+.noResults {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+}

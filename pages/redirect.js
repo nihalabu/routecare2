@@ -11,7 +11,7 @@ export default function Redirect() {
             if (!user) {
                 router.push('/login');
             } else if (userRole) {
-                if (userRole === 'caretaker' || userRole === 'nri') {
+                if (userRole === 'caretaker' || userRole === 'nri' || userRole === 'admin') {
                     router.push(`/${userRole}/dashboard`);
                 } else {
                     console.error('Invalid user role detected:', userRole);
